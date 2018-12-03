@@ -15,7 +15,7 @@ export class MyApp {
   //rootPage:any = HomePage;
   rootPage:any;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private _ajustes: AjustesProvider) {
+  constructor(private platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private _ajustes: AjustesProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -27,6 +27,12 @@ export class MyApp {
           }else{
             this.rootPage = HomePage;
           }
+          this.platform.pause.subscribe(()=>{
+            console.log("La aplicación se detendrá");
+          });
+          this.platform.resume.subscribe(()=>{
+            console.log("La aplicación va a continuar");
+          });
           //que se mantengan, hasta que cargue el storage
           statusBar.styleDefault();
           splashScreen.hide();
